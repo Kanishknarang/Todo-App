@@ -1,0 +1,21 @@
+﻿{% extends "todo/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Your Todo list</h1>
+
+<ul>
+{% for todo_item in all_items %}
+<li>{{ todo_item.content }}
+<form action="/deleteTodo/{{ todo_item.id }}" style="display: inline;" method = "post" >{% csrf_token %}
+<input class="btn btn-danger" type="submit" value="Delete"/>
+</form>
+</li>
+<br>
+{% endfor%}
+</ul>
+
+<form action="/addTodo/" method = "post">{% csrf_token %}
+<input type="text" name="content"/>
+<input class="btn btn-primary" type="submit" value="Add"/>
+</form>
+{% endblock content %}

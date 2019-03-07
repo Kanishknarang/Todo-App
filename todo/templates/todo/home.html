@@ -1,0 +1,9 @@
+﻿
+{% extends "todo/base.html" %}
+{% block content %}
+<h1>Welcome to Todo App<h1>
+{% if user.is_authenticated %}
+<h3>Click on the Todo list button on the navigation bar</h3>	
+{% endif %}
+
+{% endblock content %}
