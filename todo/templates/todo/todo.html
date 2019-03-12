@@ -3,19 +3,27 @@
 {% block content %}
 <h1>Your Todo list</h1>
 
-<ul>
+<ul class="list-group">
+{% if all_items|length < 1 %}
+<br>
+<h4>No items in the list</h4>
+<br>
+{% endif %}
 {% for todo_item in all_items %}
-<li>{{ todo_item.content }}
+<li class="list-group-item">{{ todo_item.content }}
+<br><small>{{ todo_item.tasktime }}</small>
 <form action="/deleteTodo/{{ todo_item.id }}" style="display: inline;" method = "post" >{% csrf_token %}
-<input class="btn btn-danger" type="submit" value="Delete"/>
+<p style="float:right;float:top;"><input class="btn btn-danger" type="submit" value="Delete"/></p>
 </form>
+<a href="/updateView/{{ todo_item.id }}"><p style="float:right;"><input type="submit" class="btn btn-primary" value="Update"></p></a>
 </li>
 <br>
 {% endfor%}
 </ul>
 
 <form action="/addTodo/" method = "post">{% csrf_token %}
-<input type="text" name="content"/>
+Enter Todo item: <input type="text" name="content" required/><br><br>
+Enter time: <input type="time" name="tasktime" required/><br><br>
 <input class="btn btn-primary" type="submit" value="Add"/>
 </form>
 {% endblock content %}

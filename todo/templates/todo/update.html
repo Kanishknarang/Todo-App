@@ -1,0 +1,12 @@
+﻿{% extends "todo/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Update</h1>
+
+<br>
+<form action="/updateTodo/{{ todo_id }}" method = "post">{% csrf_token %}
+Enter Todo item: <input type="text" name="content" required/><br><br>
+Enter time: <input type="time" name="tasktime" required/><br><br>
+<input class="btn btn-primary" type="submit" value="Update"/>
+</form>
+{% endblock content %}

@@ -3,7 +3,11 @@
 {% block content %}
 <h1>Welcome to Todo App<h1>
 {% if user.is_authenticated %}
-<h3>Click on the Todo list button on the navigation bar</h3>	
+<br>
+<h3>Click on the Todo list button on the navigation bar to see your Todo list.</h3>
+{% else %}
+<br>
+<h3>Please Register or Login.</h3>	
 {% endif %}
 
 {% endblock content %}

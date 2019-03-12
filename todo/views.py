@@ -14,8 +14,13 @@ def todoView(request):
     return render(request, 'todo/todo.html', {'all_items' : all_items})
 
 def addTodo(request):
-    new_item = TodoItem(author= request.user, content = request.POST['content'])
-    new_item.save()
+    user= request.user
+    cont = request.POST['content']
+    time = request.POST['tasktime']
+
+    if cont is not None and time is not None:
+        new_item = TodoItem(author= request.user, content = request.POST['content'], tasktime = request.POST['tasktime'])
+        new_item.save()
 
     return HttpResponseRedirect('/todo/')
 
@@ -23,4 +28,23 @@ def deleteTodo(request, todo_id):
 
     item = TodoItem.objects.get(id = todo_id)
     item.delete()
+    return HttpResponseRedirect('/todo/')
+
+
+def updateView(request, todo_id):
+    
+    return render(request, 'todo/update.html', {'todo_id' : todo_id})
+
+
+def updateTodo(request, todo_id):
+    user= request.user
+    cont = request.POST['content']
+    time = request.POST['tasktime']
+
+    item = TodoItem.objects.get(id = todo_id)
+    item.content = cont
+    item.tasktime = time
+    item.save()
+    
+
     return HttpResponseRedirect('/todo/')
